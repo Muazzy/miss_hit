@@ -19,7 +19,7 @@ body {
 }
 
 #canvas {
-    background-color: lightcyan;
+    background-color: white;
     padding: 10%;
     margin: auto;
     display: block;
@@ -27,7 +27,7 @@ body {
 }
 
 #bombersTable {
-    background-color: lightyellow;
+    background-color: lightcyan;
     border: 2px black;
     width: 100%;
     padding: 5%;
