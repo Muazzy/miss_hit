@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Miss Hit</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h1>MISS HIT PROBLEM</h1>
+
+    <div class="input-container">
+        <div class="input-section">
+            <label for="stdDevX">Standard Deviation (X):</label>
+            <input type="number" id="stdDevX" step="any" value="600" required>
+            <br>
+            <br>
+            <label for="stdDevY">Standard Deviation (Y):</label>
+            <input type="number" id="stdDevY" step="any" value="300" required>
+        </div>
+
+        <!-- Add input fields for area coordinates -->
+        <div id="areaCoordinatesInputs">
+            <h3>Area Coordinates</h3>
+            <div id="coordinates-list">
+            </div>
+            <button id="addCoordinate">Add Coordinate</button>
+        </div>
+        <!-- <button id="addCoordinateButton">Add Coordinate</button> -->
+        <br>
+
+        <br>
+
+        <!-- Add a simulation button -->
+        <button id="simulateButton">Simulate</button>
+
+
+    </div>
+
+
+    <br>
+    <br>
+
+    <canvas id="canvas"></canvas>
+    <table id="bombersTable" border="2">
+        <thead>
+            <th>Bomber</th>
+            <th>RNN(x)</th>
+            <th>x-Coordinate</th>
+            <th>RNN(y)</th>
+            <th>y-Coordinate</th>
+            <th>Result</th>
+        </thead>
+        <tbody id="Btbody">
+
+        </tbody>
+    </table>
+</body>
+<script src="./script.js"></script>
+
+</html>
