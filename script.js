@@ -166,35 +166,50 @@ function clearRows() {
     document.querySelector("#Btbody").innerHTML = ""
 }
 
-// Function to check if a point is inside the area
+
 /**
- * The function checks if a given point (x, y) is inside a polygon defined by an array of coordinates.
+ * The function `isInsideArea` determines whether a given point (x, y) is inside a polygon defined by
+ * an array of coordinates.
  * 
  * @param x The x-coordinate of the point you want to check if it is inside the area.
- * @param y The parameter `y` represents the y-coordinate of a point.
+ * @param y The parameter `y` represents the y-coordinate of the point that we want to check if it is
+ * inside the area defined by the polygon.
  * 
- * @return a boolean value indicating whether the given point (x, y) is inside the area defined by the
- * coordinatesArray.
- * 
- * this function still misses the edgecase, the coordinate should be strictly inside the polygon and it will not consider its 
- * inside the polygon when the coordinates are on the edge or vertices exactly
+ * @return a boolean value. It returns true if the given point (x, y) is inside the area defined by the
+ * coordinatesArray, and false otherwise.
  */
 function isInsideArea(x, y) {
-    let inside = false;
+    let intersectionCount = 0; // Counter for intersections
+
     for (let i = 0, j = coordinatesArray.length - 1; i < coordinatesArray.length; j = i++) {
+
+        //COORDINATES of ith index i.e: 0
         const xi = coordinatesArray[i][0];
         const yi = coordinatesArray[i][1];
+        //COORDINATES of i+1th index i.e: 1
         const xj = coordinatesArray[j][0];
         const yj = coordinatesArray[j][1];
 
-        const intersect = ((yi > y) !== (yj > y)) &&
-            (x < ((xj - xi) * (y - yi) / (yj - yi) + xi));
-        if (intersect) {
-            inside = !inside;
+        const isYAbovePoint = (yi > y);
+        const isYjAbovePoint = (yj > y);
+
+        // using eq of line, it checks if a point (x, y) is to the left of a 
+        // line segment defined by(xi, yi) and(xj, yj).It uses a rearranged form of the equation 
+        // of a line to calculate the x-coordinate corresponding to the y-coordinate y.
+        // If x is less than this calculated x-coordinate, the point is on the left side of the line segment.
+        // This helps determine if the point is inside the polygon.
+        const isXIntersectLeftOfPoint = (x < ((xj - xi) * (y - yi) / (yj - yi) + xi));
+
+        const doesIntersect = (isYAbovePoint !== isYjAbovePoint) && isXIntersectLeftOfPoint;
+        if (doesIntersect) {
+            intersectionCount++;
         }
     }
-    return inside;
+
+    return intersectionCount % 2 !== 0; // Odd intersections mean point is inside
 }
+
+
 
 // Function to generate a random normal variable using Box-Muller transform
 function generateRandomNormal() {
